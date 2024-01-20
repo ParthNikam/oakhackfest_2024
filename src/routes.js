@@ -52,14 +52,14 @@ const routes = [
     route: "/schedule",
     component: <Tables />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Calendar",
-  //   key: "calendar",
-  //   icon: <Icon fontSize="small">calendar_month</Icon>,
-  //   route: "/calendar",
-  //   component: <Billing />,
-  // },
+  {
+    type: "collapse",
+    name: "Calendar",
+    key: "calendar",
+    icon: <Icon fontSize="small">calendar_month</Icon>,
+    route: "/calendar",
+    component: <Billing />,
+  },
   {
     type: "collapse",
     name: "Notifications",

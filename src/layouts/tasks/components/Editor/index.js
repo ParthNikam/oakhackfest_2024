@@ -200,9 +200,9 @@ function Editor({ taskId }) {
   }, [title, content]);
 
   // Send Data to Llama
-  const sendDatatoLlama = async (inputText) => {
+  const sendDatatoLlama = async (inputText, modelType) => {
     try {
-      const data = await dispatch(getLlamaResponse(inputText));
+      const data = await dispatch(getLlamaResponse(inputText, modelType));
       console.log("data aaya bhaai!!~ ", data);
       return data;
     } catch (e) {
@@ -214,14 +214,14 @@ function Editor({ taskId }) {
     Array(content.length).fill(false)
   );
 
-  const handleAssistantClick = async (index) => {
+  const handleAssistantClick = async (index, modelType) => {
     try {
       console.log(index);
       const updatedLoadingStates = [...loadingStates];
       updatedLoadingStates[index] = true; // Set loading to true for the specific button
       setLoadingStates(updatedLoadingStates);
 
-      const llamaResponse = await sendDatatoLlama(content[index].text);
+      const llamaResponse = await sendDatatoLlama(content[index].text, modelType);
       const newContent = [...content];
       newContent[index] = {
         ...newContent[index],
@@ -372,55 +372,46 @@ function Editor({ taskId }) {
                       {loadingStates[index] ? (
                         <CircularProgress color="info" />
                       ) : (
-                        // <MDButton
-                        //   variant="outlined"
-                        //   color="info"
-                        //   onClick={() => handleButtonClick(index)}
-                        // >
-                        //   <AutoAwesomeRoundedIcon
-                        //   sx={{ width: "20px", height: "20px" }}
-                        // />
-                        // </MDButton>
+                        <MDButton
+                          variant="outlined"
+                          color="info"
+                          iconOnly
+                          onClick={() => handleAssistantClick(index, 'planner')}
+                        >
+                          <AutoAwesomeRoundedIcon
+                          sx={{ width: "20px", height: "20px" }}
+                        />
+                        </MDButton>
 
-                        <div>
-                          <MDButton
-                            id="basic-button"
-                            aria-controls="basic-menu"
-                            aria-haspopup="true"
-                            variant="outlined"
-                            color="info"
-                            size="medium"
-                            iconOnly
-                            aria-expanded={open ? "true" : undefined}
-                            onClick={handleMenuClick}
-                          >
-                            <AutoAwesomeRoundedIcon
-                              sx={{ width: "20px", height: "20px" }}
-                            />
-                          </MDButton>
-                          <Menu
-                            id="basic-menu"
-                            anchorEl={anchorMenuEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                              "aria-labelledby": "basic-button",
-                            }}
-                          >
-                            <MenuItem onClick={() => handleAssistantClick(index)}>
-                              Planner
-                            </MenuItem>
-                            <MenuItem onClick={() => handleAssistantClick(index)}>
-                              Summarize
-                            </MenuItem>
-                            <MenuItem onClick={() => handleAssistantClick(index)}>
-                              Elaborate
-                            </MenuItem>
-                            <MenuItem onClick={() => handleAssistantClick(index)}>
-                              Assistant
-                            </MenuItem>
-                          </Menu>
-                        </div>
+                        // <div>
+                        //   <MDButton
+                        //     id="basic-button"
+                        //     aria-controls="basic-menu"
+                        //     aria-haspopup="true"
+                        //     variant="outlined"
+                        //     color="info"
+                        //     size="medium"
+                        //     iconOnly
+                        //     aria-expanded={open ? "true" : undefined}
+                        //     onClick={handleMenuClick}
+                        //   >
+                        //     <AutoAwesomeRoundedIcon
+                        //       sx={{ width: "20px", height: "20px" }}
+                        //     />
+                        //   </MDButton>
+                        //   <Menu
+                        //     id="basic-menu"
+                        //     anchorEl={anchorMenuEl}
+                        //     open={open}
+                        //     onClose={handleClose}
+                        //     MenuListProps={{
+                        //       "aria-labelledby": "basic-button",
+                        //     }}
+                        //   >
+                        //     <MenuItem onClick={() => handleAssistantClick(index, "planner")}>Planner</MenuItem>
+                            
+                        //   </Menu>
+                        // </div>
                       )}
                     </Grid>
                   </Grid>

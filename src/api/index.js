@@ -7,6 +7,6 @@ const api = axios.create({
   baseURL,
 });
 
-export const fetchLlamaResponse = (inputText) => api.post('/tasks', { inputText });
+export const fetchLlamaResponse = (inputText, modelType) => api.post('/tasks', { inputText, modelType });
 
 
