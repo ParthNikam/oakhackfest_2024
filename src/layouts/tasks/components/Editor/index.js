@@ -91,10 +91,10 @@ function Editor({ taskId }) {
   const handleInputChange = (e, index) => {
     const newContent = [...content];
     newContent[index] = {
-      ...newContent[index], // Preserve the existing properties of the object
-      text: e.target.value, // Update the 'text' property
+      ...newContent[index],
+      text: e.target.value,
     };
-    setContent(newContent);
+    setContent((prevState) => [...prevState.slice(0, index), newContent[index], ...prevState.slice(index + 1)]);
   };
 
   const handleCheckboxChange = (index) => {

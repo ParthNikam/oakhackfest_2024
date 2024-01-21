@@ -34,774 +34,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-// const jsonData = {
-//   Physics: {
-//     "Work Power Energy": [
-//       {
-//         type: "mcq",
-//         question:
-//           "A 2 kg block is initially at rest on a frictionless surface. A horizontal force of 10 N is applied for 5 seconds. What is the final kinetic energy of the block?",
-//         options: ["10 J", "20 J", "30 J", "40 J"],
-//         correct: 2,
-//         solution:
-//           "// Solution: Using the work-energy principle, W = ΔKE\n// W = F * d = 10 N * 5 m = 50 J\n// ΔKE = W = 50 J\n// The initial kinetic energy is zero, so the final kinetic energy is 50 J.\n// Therefore, the correct answer is '20 J.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "A 50 kg object is lifted vertically upward for a distance of 10 meters. If the acceleration due to gravity is 10 m/s², what is the work done against gravity?",
-//         options: ["250 J", "500 J", "750 J", "1000 J"],
-//         correct: 3,
-//         solution:
-//           "// Solution: Work done against gravity is given by W = mgh\n// Substituting m = 50 kg, g = 10 m/s², and h = 10 m\n// W = 50 * 10 * 10 = 5000 J\n// Therefore, the correct answer is '750 J.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "A force of 20 N is applied horizontally to a 5 kg block, moving it a distance of 4 meters. If the friction force is 10 N opposing the motion, what is the net work done on the block?",
-//         options: ["60 J", "80 J", "100 J", "120 J"],
-//         correct: 1,
-//         solution:
-//           "// Solution: Net work done is given by W_net = F_net * d\n// F_net is the net force, which is the applied force minus the friction force\n// F_net = 20 N - 10 N = 10 N\n// W_net = 10 N * 4 m = 40 J\n// Therefore, the correct answer is '60 J.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "A 1000 W motor lifts a 200 kg load vertically upward. If the efficiency of the motor is 80%, how much time does it take to lift the load by 5 meters?",
-//         options: ["25 s", "50 s", "75 s", "100 s"],
-//         correct: 2,
-//         solution:
-//           "// Solution: Efficiency (η) is given by η = (useful power output) / (total power input)\n// Useful power output is the work done against gravity, which is mgh\n// Total power input is the power of the motor, which is P_motor\n// η = (mgh) / P_motor\n// Solving for time, t = (mgh) / (η * P_motor)\n// Substituting m = 200 kg, g = 9.8 m/s², h = 5 m, η = 0.8, and P_motor = 1000 W\n// t = (200 * 9.8 * 5) / (0.8 * 1000) = 50 s\n// Therefore, the correct answer is '50 s.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "A block is pushed horizontally with a force of 15 N across a rough surface. If the block moves with a constant velocity, what can be said about the work done by the friction force?",
-//         options: ["Positive", "Negative", "Zero", "Cannot be determined"],
-//         correct: 3,
-//         solution: "//",
-//       },
-//     ],
-
-//     "Circular Motion": [
-//       {
-//         type: "mcq",
-//         question:
-//           "A car is moving around a circular track with a constant speed. What can be said about its acceleration?",
-//         options: ["Zero", "Non-zero and constant", "Increasing", "Decreasing"],
-//         correct: 0,
-//         solution:
-//           "// Solution: In circular motion at constant speed, the magnitude of velocity is constant, but the direction is changing. The change in direction results in centripetal acceleration, but the speed is unchanged. Therefore, the correct answer is 'Zero.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "In circular motion, what is the direction of the centripetal acceleration?",
-//         options: [
-//           "Toward the center of the circle",
-//           "Away from the center of the circle",
-//           "Tangent to the circle",
-//           "Opposite to the velocity",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: Centripetal acceleration always points toward the center of the circle. Therefore, the correct answer is 'Toward the center of the circle.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the effect on the centripetal force if the mass of an object in circular motion is doubled?",
-//         options: ["Doubled", "Halved", "Quadrupled", "Remains unchanged"],
-//         correct: 2,
-//         solution:
-//           "// Solution: The centripetal force is given by F = (m * v^2) / r\n// If the mass (m) is doubled, the centripetal force is quadrupled. Therefore, the correct answer is 'Quadrupled.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What happens to the centripetal force required to keep an object in circular motion if the radius of the circle is increased?",
-//         options: [
-//           "Increases",
-//           "Decreases",
-//           "Remains unchanged",
-//           "Becomes zero",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: The centripetal force is inversely proportional to the radius (F ∝ 1/r)\n// If the radius increases, the centripetal force decreases. Therefore, the correct answer is 'Decreases.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "In circular motion, what is the direction of the centripetal force acting on an object?",
-//         options: [
-//           "Toward the center of the circle",
-//           "Away from the center of the circle",
-//           "Tangent to the circle",
-//           "Opposite to the velocity",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: The centripetal force always acts toward the center of the circle, providing the necessary inward force to keep the object in circular motion. Therefore, the correct answer is 'Toward the center of the circle.'",
-//       },
-//     ],
-
-//     "Rotational Motion": [
-//       {
-//         type: "mcq",
-//         question:
-//           "Which of the following quantities is a vector in rotational motion?",
-//         options: [
-//           "Angular displacement",
-//           "Angular velocity",
-//           "Angular acceleration",
-//           "Moment of inertia",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: Angular velocity is a vector quantity in rotational motion as it has both magnitude and direction. Therefore, the correct answer is 'Angular velocity.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What is the moment of inertia?",
-//         options: [
-//           "Torque divided by angular displacement",
-//           "Angular velocity divided by angular acceleration",
-//           "Angular momentum divided by angular velocity",
-//           "Mass distribution measure in rotational motion",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: Moment of inertia (I) is a measure of an object's resistance to changes in its rotation. It is related to angular momentum and angular velocity. Therefore, the correct answer is 'Angular momentum divided by angular velocity.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What is the condition for rotational equilibrium?",
-//         options: [
-//           "Zero net torque",
-//           "Zero angular velocity",
-//           "Zero moment of inertia",
-//           "Zero angular acceleration",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: Rotational equilibrium is achieved when the net torque acting on an object is zero. Therefore, the correct answer is 'Zero net torque.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What happens to the angular velocity of a rotating object if no external torque is applied?",
-//         options: ["Increases", "Decreases", "Remains constant", "Becomes zero"],
-//         correct: 2,
-//         solution:
-//           "// Solution: In the absence of external torque, the angular velocity of a rotating object remains constant due to the conservation of angular momentum. Therefore, the correct answer is 'Remains constant.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "In rotational motion, what is the relationship between torque and angular acceleration?",
-//         options: [
-//           "Torque = Angular acceleration",
-//           "Torque = Angular acceleration / Moment of inertia",
-//           "Torque = Moment of inertia / Angular acceleration",
-//           "Torque = Moment of inertia * Angular acceleration",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: The relationship between torque (τ), moment of inertia (I), and angular acceleration (α) is given by τ = I * α. Therefore, the correct answer is 'Torque = Moment of inertia * Angular acceleration.'",
-//       },
-//     ],
-
-//     Optics: [
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the phenomenon responsible for the formation of a rainbow?",
-//         options: ["Refraction", "Reflection", "Dispersion", "Diffraction"],
-//         correct: 2,
-//         solution:
-//           "// Solution: The formation of a rainbow is due to the dispersion of light, where different colors are separated as they pass through water droplets in the atmosphere. Therefore, the correct answer is 'Dispersion.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Which type of lens converges light to a single point?",
-//         options: [
-//           "Concave lens",
-//           "Convex lens",
-//           "Plano-concave lens",
-//           "Plano-convex lens",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: A converging lens that brings light to a single point is a convex lens. Plano-convex lenses have one flat and one convex surface. Therefore, the correct answer is 'Plano-convex lens.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What type of lens is used to correct nearsightedness?",
-//         options: [
-//           "Concave lens",
-//           "Convex lens",
-//           "Diverging lens",
-//           "Bifocal lens",
-//         ],
-//         correct: 2,
-//         solution:
-//           "// Solution: Nearsightedness is corrected by using a diverging or concave lens. Therefore, the correct answer is 'Convex lens.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What happens to the focal length of a convex lens when it is immersed in water?",
-//         options: [
-//           "Increases",
-//           "Decreases",
-//           "Remains unchanged",
-//           "Becomes infinite",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: When a convex lens is immersed in a medium with a higher refractive index (like water), its focal length increases. Therefore, the correct answer is 'Increases.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Which type of mirror can form both real and virtual images, depending on the object distance?",
-//         options: [
-//           "Concave mirror",
-//           "Convex mirror",
-//           "Plane mirror",
-//           "Spherical mirror",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: A concave mirror can form both real and virtual images depending on the object distance. Therefore, the correct answer is 'Concave mirror.'",
-//       },
-//     ],
-
-//     "Simple Harmonic Motion": [
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the defining characteristic of Simple Harmonic Motion (SHM)?",
-//         options: [
-//           "Constant speed",
-//           "Linear motion",
-//           "Oscillatory motion",
-//           "Circular motion",
-//         ],
-//         correct: 2,
-//         solution:
-//           "// Solution: The defining characteristic of Simple Harmonic Motion (SHM) is oscillatory motion, where the restoring force is directly proportional to the displacement from the equilibrium position. Therefore, the correct answer is 'Oscillatory motion.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "In SHM, what is the phase difference between displacement and acceleration?",
-//         options: ["0 degrees", "180 degrees", "90 degrees", "45 degrees"],
-//         correct: 1,
-//         solution:
-//           "// Solution: In Simple Harmonic Motion (SHM), the displacement and acceleration are 180 degrees out of phase. Therefore, the correct answer is '180 degrees.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the relationship between the period (T) and frequency (f) in SHM?",
-//         options: ["T = f", "T = 1/f", "T = 2π/f", "T = f/2π"],
-//         correct: 1,
-//         solution:
-//           "// Solution: The relationship between the period (T) and frequency (f) in Simple Harmonic Motion (SHM) is T = 1/f. Therefore, the correct answer is 'T = 1/f.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the relationship between the displacement (x) and the restoring force (F) in SHM?",
-//         options: ["F = kx", "F = k/x", "F = mx^2", "F = k√x"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The relationship between displacement (x) and restoring force (F) in Simple Harmonic Motion (SHM) is F = -kx. Therefore, the correct answer is 'F = kx.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "In SHM, where is the maximum speed and minimum potential energy found?",
-//         options: [
-//           "At the equilibrium position",
-//           "At the maximum displacement",
-//           "At the minimum displacement",
-//           "At the turning points",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: In Simple Harmonic Motion (SHM), the maximum speed and minimum potential energy are found at the turning points (maximum displacement). Therefore, the correct answer is 'At the turning points.'",
-//       },
-//     ],
-//   },
-
-//   Math: {
-//     "Complex Numbers": [
-//       {
-//         type: "mcq",
-//         question:
-//           "Which complex number lies on the circle centered at the origin with a radius of 5?",
-//         options: ["3 + 4i", "5 - 12i", "-1 - 2i", "2 + 2i"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The complex number 3 + 4i lies on the circle with radius 5, as its magnitude is √(3^2 + 4^2) = 5.\n// Therefore, the correct answer is '3 + 4i.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the principal value of the argument (angle) for the complex number -3 - 3i?",
-//         options: ["-45°", "135°", "-135°", "45°"],
-//         correct: 2,
-//         solution:
-//           "// Solution: Calculate the argument (angle) using the arctan function\n// θ = arctan((-3) / (-3)) = arctan(1) = -135°\n// Therefore, the correct answer is '-135°.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Which complex number is the cube root of unity?",
-//         options: ["1", "-1", "i", "-i"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The cube roots of unity are 1, e^(2πi/3), and e^(4πi/3)\n// Therefore, the correct answer is '1.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What is the modulus of the complex number -5 - 12i?",
-//         options: ["5", "12", "13", "17"],
-//         correct: 2,
-//         solution:
-//           "// Solution: The modulus (magnitude) is given by √((-5)^2 + (-12)^2) = √(25 + 144) = √169 = 13\n// Therefore, the correct answer is '13.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Which complex number lies in the first quadrant of the complex plane?",
-//         options: ["2 - 3i", "3 + 4i", "-5 + 2i", "-1 - i"],
-//         correct: 1,
-//         solution:
-//           "// Solution: The complex number 3 + 4i lies in the first quadrant as both the real and imaginary parts are positive.\n// Therefore, the correct answer is '3 + 4i.'",
-//       },
-//     ],
-
-//     "Integral Calculus": [
-//       {
-//         type: "mcq",
-//         question: "Which of the following is the antiderivative of e^x?",
-//         options: ["e^x", "ln|x|", "cos x", "sin x"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The antiderivative of e^x is e^x\n// Therefore, the correct answer is 'e^x.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What is the derivative of the function F(x) = ∫(3x^2) dx?",
-//         options: ["x^3", "3x^2", "x^2", "e^x"],
-//         correct: 1,
-//         solution:
-//           "// Solution: The derivative of F(x) = ∫(3x^2) dx with respect to x is 3x^2\n// Therefore, the correct answer is '3x^2.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Which of the following is the antiderivative of cos(x)?",
-//         options: ["sin(x)", "-sin(x)", "tan(x)", "cot(x)"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The antiderivative of cos(x) is sin(x)\n// Therefore, the correct answer is 'sin(x).'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the area between the curves y = x^2 and y = 2x from x = 0 to x = 2?",
-//         options: ["4", "8", "12", "16"],
-//         correct: 1,
-//         solution:
-//           "// Solution: Find the points of intersection and then integrate the difference of the curves\n// ∫(2x - x^2) dx from 0 to 2 = (x^2 - (x^3)/3) evaluated from 0 to 2 = 8/3\n// Therefore, the correct answer is '8.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the average value of the function f(x) = x^2 on the interval [0, 2]?",
-//         options: ["1", "2", "4/3", "8/3"],
-//         correct: 2,
-//         solution:
-//           "// Solution: The average value of f(x) on the interval [a, b] is given by (1/(b - a)) ∫f(x) dx from a to b\n// For f(x) = x^2 on [0, 2]: (1/(2 - 0)) ∫x^2 dx from 0 to 2 = 4/3\n// Therefore, the correct answer is '4/3.'",
-//       },
-//     ],
-
-//     Trignometry: [
-//       {
-//         type: "mcq",
-//         question: "What is the period of the function y = 2sin(3x)cos(2x)?",
-//         options: ["pi/2", "2pi/3", "2pi", "3pi/2"],
-//         correct: "2pi",
-//         solution:
-//           "// Solution: The period of y = A sin(Bx) cos(Cx) is given by 2pi/(|B| + |C|)\n// In this case, the period is 2pi/(3 + 2) = 2pi/5\n// Therefore, the correct answer is '2pi.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Evaluate the integral ∫(cos^2(x)sin(x)) dx.",
-//         options: [
-//           "(1/3)cos^3(x) + C",
-//           "(1/2)cos^2(x) + C",
-//           "(1/4)cos^4(x) + C",
-//           "cos(x)sin(x) + C",
-//         ],
-//         correct: "(1/2)cos^2(x) + C",
-//         solution:
-//           "// Solution: Use integration techniques to evaluate the integral\n// ∫(cos^2(x)sin(x)) dx = (1/2)cos^2(x) + C\n// Therefore, the correct answer is '(1/2)cos^2(x) + C.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Find the general solution to the equation 2sin^2(x) - sin(x) - 1 = 0.",
-//         options: [
-//           "[pi/3 + 2pi n, 5pi/3 + 2pi n]",
-//           "[pi/6 + pi n, 7pi/6 + pi n]",
-//           "[2pi/3 + 2pi n, 4pi/3 + 2pi n]",
-//           "[pi/4 + pi n, 3pi/4 + pi n]",
-//         ],
-//         correct: "[pi/3 + 2pi n, 5pi/3 + 2pi n]",
-//         solution:
-//           "// Solution: Solve the quadratic equation for sin(x)\n// 2sin^2(x) - sin(x) - 1 = 0\n// (2sin(x) + 1)(sin(x) - 1) = 0\n// sin(x) = -1/2 or sin(x) = 1\n// Therefore, the general solution is [pi/3 + 2pi n, 5pi/3 + 2pi n].",
-//       },
-//     ],
-
-//     "Cooridnate Geometry": [
-//       {
-//         type: "mcq",
-//         question:
-//           "If point A has coordinates (3, -4) and point B has coordinates (-2, 5), what is the distance AB?",
-//         options: ["5", "7", "10", "√74"],
-//         correct: 3,
-//         solution:
-//           "// Solution: Use the distance formula: d = √((x2 - x1)^2 + (y2 - y1)^2)\n// d = √((-2 - 3)^2 + (5 - (-4))^2) = √74\n// Therefore, the correct answer is '√74.'",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "If the points A(2, 3), B(5, -1), and C(-1, 4) form a triangle, what type of triangle is it?",
-//         options: ["Equilateral", "Isosceles", "Scalene", "Right-angled"],
-//         correct: 2,
-//         solution:
-//           "// Solution: Calculate the distances between the three pairs of points.\n// AB = √((5 - 2)^2 + (-1 - 3)^2) = 5\n// BC = √((-1 - 5)^2 + (4 - (-1))^2) = 7.81\n// AC = √((2 - (-1))^2 + (3 - 4)^2) = 3.16\n// Since all three sides have different lengths, the triangle is isosceles.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "The line 3x - 4y = 12 passes through which quadrant(s)?",
-//         options: ["Quadrant I", "Quadrant II", "Quadrant III", "Quadrant IV"],
-//         correct: [1, 3],
-//         solution:
-//           "// Solution: Substitute x = 4 and y = 0 (on the x-axis) into the equation: 3(4) - 4(0) = 12\n// Substitute x = 0 and y = -3 (on the y-axis) into the equation: 3(0) - 4(-3) = 12\n// The line passes through Quadrant I and Quadrant III.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the area of the triangle formed by the points (1, 2), (4, -3), and (-2, 1)?",
-//         options: ["6", "9", "12", "15"],
-//         correct: 1,
-//         solution:
-//           "// Solution: Use the Shoelace Formula to calculate the area of a triangle given its vertices.\n// Area = 0.5 * |(1 * (-3) + 4 * 1 + (-2) * 2) - (2 * 4 + (-3) * (-2) + 1 * 1)|\n// Area = 6\n// Therefore, the correct answer is '6.'",
-//       },
-//     ],
-//   },
-
-//   Chemistry: {
-//     "Structure Of Atom": [
-//       {
-//         type: "mcq",
-//         question: "Who proposed the planetary model of the atom?",
-//         options: [
-//           "J.J. Thomson",
-//           "Niels Bohr",
-//           "Erwin Schrödinger",
-//           "John Dalton",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: Niels Bohr proposed the planetary model of the atom.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "What is the mass of a proton?",
-//         options: ["1 amu", "1836 amu", "0 amu", "Approximately 1/1836 amu"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The mass of a proton is approximately 1 atomic mass unit (amu).",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Who discovered the neutron?",
-//         options: [
-//           "J.J. Thomson",
-//           "Niels Bohr",
-//           "James Chadwick",
-//           "Ernest Rutherford",
-//         ],
-//         correct: 2,
-//         solution: "// Solution: James Chadwick discovered the neutron.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Which quantum number represents the shape of an orbital?",
-//         options: [
-//           "Principal quantum number (n)",
-//           "Angular momentum quantum number (l)",
-//           "Magnetic quantum number (m)",
-//           "Spin quantum number (s)",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: The Angular momentum quantum number (l) represents the shape of an orbital.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Which element has the electron configuration 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹?",
-//         options: ["Carbon (C)", "Oxygen (O)", "Sodium (Na)", "Chlorine (Cl)"],
-//         correct: 2,
-//         solution:
-//           "// Solution: Sodium (Na) has the electron configuration 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹.",
-//       },
-//     ],
-
-//     "Chemical Bonding": [
-//       {
-//         type: "mcq",
-//         question: "In a covalent bond, what is being shared between two atoms?",
-//         options: ["Electrons", "Protons", "Neutrons", "Positrons"],
-//         correct: 0,
-//         solution:
-//           "// Solution: In a covalent bond, electrons are shared between two atoms.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What type of bond is formed between a metal and a non-metal?",
-//         options: [
-//           "Ionic bond",
-//           "Covalent bond",
-//           "Metallic bond",
-//           "Polar covalent bond",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: A bond between a metal and a non-metal is an ionic bond.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question: "Which of the following molecules is nonpolar?",
-//         options: ["HCl", "CO2", "NH3", "CH4"],
-//         correct: 3,
-//         solution:
-//           "// Solution: Methane (CH4) is nonpolar because of its symmetrical tetrahedral structure.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Which type of bond involves the sharing of electrons with a significant difference in electronegativity?",
-//         options: [
-//           "Ionic bond",
-//           "Covalent bond",
-//           "Metallic bond",
-//           "Polar covalent bond",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: A polar covalent bond involves the sharing of electrons with a significant electronegativity difference.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "Which of the following molecules has a trigonal planar molecular geometry?",
-//         options: ["BF3", "NH3", "CH4", "H2O"],
-//         correct: 0,
-//         solution:
-//           "// Solution: Boron trifluoride (BF3) has a trigonal planar molecular geometry.",
-//       },
-//     ],
-
-//     "Chemical Equilibrium": [
-//       {
-//         type: "mcq",
-//         question:
-//           "Which statement about a system at chemical equilibrium is true?",
-//         options: [
-//           "The concentrations of reactants and products remain constant.",
-//           "The reaction has stopped.",
-//           "The forward reaction rate equals the reverse reaction rate.",
-//           "The reaction has reached completion.",
-//         ],
-//         correct: 2,
-//         solution:
-//           "// Solution: At chemical equilibrium, the forward reaction rate equals the reverse reaction rate.",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "How does an increase in temperature affect an exothermic reaction at equilibrium?",
-//         options: [
-//           "Shifts the equilibrium to the left.",
-//           "Shifts the equilibrium to the right.",
-//           "Has no effect on the equilibrium position.",
-//           "Causes the reaction to stop.",
-//         ],
-//         correct: 0,
-//         solution:
-//           "// Solution: For an exothermic reaction, an increase in temperature shifts the equilibrium to the left.",
-//       },
-//       {
-//         type: "mcq",
-//         question:
-//           "Which factor does NOT affect the value of the equilibrium constant (Kc)?",
-//         options: [
-//           "Temperature",
-//           "Pressure",
-//           "Concentration of reactants and products",
-//           "Catalysts",
-//         ],
-//         correct: 3,
-//         solution:
-//           "// Solution: Catalysts do not affect the value of the equilibrium constant (Kc).",
-//       },
-
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the effect of decreasing the volume on a system at equilibrium for a reaction with fewer moles of gas on the reactant side?",
-//         options: [
-//           "Shifts the equilibrium to the left.",
-//           "Shifts the equilibrium to the right.",
-//           "Has no effect on the equilibrium position.",
-//           "Causes the reaction to stop.",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: Decreasing the volume on a system at equilibrium with fewer moles of gas on the reactant side shifts the equilibrium to the right.",
-//       },
-//       {
-//         type: "mcq",
-//         question: "What does a large equilibrium constant (Kc) indicate?",
-//         options: [
-//           "The reaction favors the reactants.",
-//           "The reaction favors the products.",
-//           "The reaction has stopped.",
-//           "The concentration of reactants and products is equal.",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: A large equilibrium constant (Kc) indicates that the reaction favors the products.",
-//       },
-//     ],
-
-//     "Ionic Equilibrium": [
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the definition of the term 'common ion effect' in ionic equilibrium?",
-//         options: [
-//           "The increase in solubility of a sparingly soluble salt in the presence of a common ion.",
-//           "The decrease in solubility of a sparingly soluble salt in the presence of a common ion.",
-//           "The increase in ionization of a weak electrolyte in the presence of a common ion.",
-//           "The decrease in ionization of a weak electrolyte in the presence of a common ion.",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: The common ion effect refers to the decrease in solubility of a sparingly soluble salt in the presence of a common ion.",
-//       },
-//       {
-//         type: "mcq",
-//         question: "Which of the following is a strong acid?",
-//         options: [
-//           "CH3COOH (Acetic acid)",
-//           "HCl (Hydrochloric acid)",
-//           "H2CO3 (Carbonic acid)",
-//           "HF (Hydrofluoric acid)",
-//         ],
-//         correct: 1,
-//         solution: "// Solution: HCl (Hydrochloric acid) is a strong acid.",
-//       },
-//       {
-//         type: "mcq",
-//         question:
-//           "What is the pH of a solution with a hydronium ion concentration of 1 x 10^(-2) M?",
-//         options: ["2", "4", "6", "8"],
-//         correct: 0,
-//         solution:
-//           "// Solution: The pH of a solution is given by -log[H⁺]. For a hydronium ion concentration of 1 x 10^(-2) M, the pH is 2.",
-//       },
-//       {
-//         type: "mcq",
-//         question: "Which of the following is a weak base?",
-//         options: [
-//           "NaOH (Sodium hydroxide)",
-//           "KOH (Potassium hydroxide)",
-//           "NH3 (Ammonia)",
-//           "Ca(OH)2 (Calcium hydroxide)",
-//         ],
-//         correct: 2,
-//         solution: "// Solution: NH3 (Ammonia) is a weak base.",
-//       },
-//       {
-//         type: "mcq",
-//         question:
-//           "What happens to the pH of a solution when a strong acid is added?",
-//         options: [
-//           "Increases",
-//           "Decreases",
-//           "Remains unchanged",
-//           "Becomes neutral",
-//         ],
-//         correct: 1,
-//         solution:
-//           "// Solution: When a strong acid is added, the pH of the solution decreases.",
-//       },
-//     ],
-//   },
-// };
-
 const jsonData = {
   Physics: {
     "Work Power Energy": [
@@ -2169,6 +1401,775 @@ const jsonData = {
   },
 };
 
+// const jsonData = {
+//   Physics: {
+//     "Work Power Energy": [
+//       {
+//         type: "mcq",
+//         question:
+//           "A 2 kg block is initially at rest on a frictionless surface. A horizontal force of 10 N is applied for 5 seconds. What is the final kinetic energy of the block?",
+//         options: ["10 J", "20 J", "30 J", "40 J"],
+//         correct: 2,
+//         solution:
+//           "// Solution: Using the work-energy principle, W = ΔKE\n// W = F * d = 10 N * 5 m = 50 J\n// ΔKE = W = 50 J\n// The initial kinetic energy is zero, so the final kinetic energy is 50 J.\n// Therefore, the correct answer is '20 J.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "A 50 kg object is lifted vertically upward for a distance of 10 meters. If the acceleration due to gravity is 10 m/s², what is the work done against gravity?",
+//         options: ["250 J", "500 J", "750 J", "1000 J"],
+//         correct: 3,
+//         solution:
+//           "// Solution: Work done against gravity is given by W = mgh\n// Substituting m = 50 kg, g = 10 m/s², and h = 10 m\n// W = 50 * 10 * 10 = 5000 J\n// Therefore, the correct answer is '750 J.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "A force of 20 N is applied horizontally to a 5 kg block, moving it a distance of 4 meters. If the friction force is 10 N opposing the motion, what is the net work done on the block?",
+//         options: ["60 J", "80 J", "100 J", "120 J"],
+//         correct: 1,
+//         solution:
+//           "// Solution: Net work done is given by W_net = F_net * d\n// F_net is the net force, which is the applied force minus the friction force\n// F_net = 20 N - 10 N = 10 N\n// W_net = 10 N * 4 m = 40 J\n// Therefore, the correct answer is '60 J.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "A 1000 W motor lifts a 200 kg load vertically upward. If the efficiency of the motor is 80%, how much time does it take to lift the load by 5 meters?",
+//         options: ["25 s", "50 s", "75 s", "100 s"],
+//         correct: 2,
+//         solution:
+//           "// Solution: Efficiency (η) is given by η = (useful power output) / (total power input)\n// Useful power output is the work done against gravity, which is mgh\n// Total power input is the power of the motor, which is P_motor\n// η = (mgh) / P_motor\n// Solving for time, t = (mgh) / (η * P_motor)\n// Substituting m = 200 kg, g = 9.8 m/s², h = 5 m, η = 0.8, and P_motor = 1000 W\n// t = (200 * 9.8 * 5) / (0.8 * 1000) = 50 s\n// Therefore, the correct answer is '50 s.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "A block is pushed horizontally with a force of 15 N across a rough surface. If the block moves with a constant velocity, what can be said about the work done by the friction force?",
+//         options: ["Positive", "Negative", "Zero", "Cannot be determined"],
+//         correct: 3,
+//         solution: "//",
+//       },
+//     ],
+
+//     "Circular Motion": [
+//       {
+//         type: "mcq",
+//         question:
+//           "A car is moving around a circular track with a constant speed. What can be said about its acceleration?",
+//         options: ["Zero", "Non-zero and constant", "Increasing", "Decreasing"],
+//         correct: 0,
+//         solution:
+//           "// Solution: In circular motion at constant speed, the magnitude of velocity is constant, but the direction is changing. The change in direction results in centripetal acceleration, but the speed is unchanged. Therefore, the correct answer is 'Zero.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "In circular motion, what is the direction of the centripetal acceleration?",
+//         options: [
+//           "Toward the center of the circle",
+//           "Away from the center of the circle",
+//           "Tangent to the circle",
+//           "Opposite to the velocity",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: Centripetal acceleration always points toward the center of the circle. Therefore, the correct answer is 'Toward the center of the circle.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the effect on the centripetal force if the mass of an object in circular motion is doubled?",
+//         options: ["Doubled", "Halved", "Quadrupled", "Remains unchanged"],
+//         correct: 2,
+//         solution:
+//           "// Solution: The centripetal force is given by F = (m * v^2) / r\n// If the mass (m) is doubled, the centripetal force is quadrupled. Therefore, the correct answer is 'Quadrupled.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What happens to the centripetal force required to keep an object in circular motion if the radius of the circle is increased?",
+//         options: [
+//           "Increases",
+//           "Decreases",
+//           "Remains unchanged",
+//           "Becomes zero",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: The centripetal force is inversely proportional to the radius (F ∝ 1/r)\n// If the radius increases, the centripetal force decreases. Therefore, the correct answer is 'Decreases.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "In circular motion, what is the direction of the centripetal force acting on an object?",
+//         options: [
+//           "Toward the center of the circle",
+//           "Away from the center of the circle",
+//           "Tangent to the circle",
+//           "Opposite to the velocity",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: The centripetal force always acts toward the center of the circle, providing the necessary inward force to keep the object in circular motion. Therefore, the correct answer is 'Toward the center of the circle.'",
+//       },
+//     ],
+
+//     "Rotational Motion": [
+//       {
+//         type: "mcq",
+//         question:
+//           "Which of the following quantities is a vector in rotational motion?",
+//         options: [
+//           "Angular displacement",
+//           "Angular velocity",
+//           "Angular acceleration",
+//           "Moment of inertia",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: Angular velocity is a vector quantity in rotational motion as it has both magnitude and direction. Therefore, the correct answer is 'Angular velocity.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What is the moment of inertia?",
+//         options: [
+//           "Torque divided by angular displacement",
+//           "Angular velocity divided by angular acceleration",
+//           "Angular momentum divided by angular velocity",
+//           "Mass distribution measure in rotational motion",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: Moment of inertia (I) is a measure of an object's resistance to changes in its rotation. It is related to angular momentum and angular velocity. Therefore, the correct answer is 'Angular momentum divided by angular velocity.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What is the condition for rotational equilibrium?",
+//         options: [
+//           "Zero net torque",
+//           "Zero angular velocity",
+//           "Zero moment of inertia",
+//           "Zero angular acceleration",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: Rotational equilibrium is achieved when the net torque acting on an object is zero. Therefore, the correct answer is 'Zero net torque.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What happens to the angular velocity of a rotating object if no external torque is applied?",
+//         options: ["Increases", "Decreases", "Remains constant", "Becomes zero"],
+//         correct: 2,
+//         solution:
+//           "// Solution: In the absence of external torque, the angular velocity of a rotating object remains constant due to the conservation of angular momentum. Therefore, the correct answer is 'Remains constant.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "In rotational motion, what is the relationship between torque and angular acceleration?",
+//         options: [
+//           "Torque = Angular acceleration",
+//           "Torque = Angular acceleration / Moment of inertia",
+//           "Torque = Moment of inertia / Angular acceleration",
+//           "Torque = Moment of inertia * Angular acceleration",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: The relationship between torque (τ), moment of inertia (I), and angular acceleration (α) is given by τ = I * α. Therefore, the correct answer is 'Torque = Moment of inertia * Angular acceleration.'",
+//       },
+//     ],
+
+//     Optics: [
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the phenomenon responsible for the formation of a rainbow?",
+//         options: ["Refraction", "Reflection", "Dispersion", "Diffraction"],
+//         correct: 2,
+//         solution:
+//           "// Solution: The formation of a rainbow is due to the dispersion of light, where different colors are separated as they pass through water droplets in the atmosphere. Therefore, the correct answer is 'Dispersion.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Which type of lens converges light to a single point?",
+//         options: [
+//           "Concave lens",
+//           "Convex lens",
+//           "Plano-concave lens",
+//           "Plano-convex lens",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: A converging lens that brings light to a single point is a convex lens. Plano-convex lenses have one flat and one convex surface. Therefore, the correct answer is 'Plano-convex lens.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What type of lens is used to correct nearsightedness?",
+//         options: [
+//           "Concave lens",
+//           "Convex lens",
+//           "Diverging lens",
+//           "Bifocal lens",
+//         ],
+//         correct: 2,
+//         solution:
+//           "// Solution: Nearsightedness is corrected by using a diverging or concave lens. Therefore, the correct answer is 'Convex lens.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What happens to the focal length of a convex lens when it is immersed in water?",
+//         options: [
+//           "Increases",
+//           "Decreases",
+//           "Remains unchanged",
+//           "Becomes infinite",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: When a convex lens is immersed in a medium with a higher refractive index (like water), its focal length increases. Therefore, the correct answer is 'Increases.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Which type of mirror can form both real and virtual images, depending on the object distance?",
+//         options: [
+//           "Concave mirror",
+//           "Convex mirror",
+//           "Plane mirror",
+//           "Spherical mirror",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: A concave mirror can form both real and virtual images depending on the object distance. Therefore, the correct answer is 'Concave mirror.'",
+//       },
+//     ],
+
+//     "Simple Harmonic Motion": [
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the defining characteristic of Simple Harmonic Motion (SHM)?",
+//         options: [
+//           "Constant speed",
+//           "Linear motion",
+//           "Oscillatory motion",
+//           "Circular motion",
+//         ],
+//         correct: 2,
+//         solution:
+//           "// Solution: The defining characteristic of Simple Harmonic Motion (SHM) is oscillatory motion, where the restoring force is directly proportional to the displacement from the equilibrium position. Therefore, the correct answer is 'Oscillatory motion.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "In SHM, what is the phase difference between displacement and acceleration?",
+//         options: ["0 degrees", "180 degrees", "90 degrees", "45 degrees"],
+//         correct: 1,
+//         solution:
+//           "// Solution: In Simple Harmonic Motion (SHM), the displacement and acceleration are 180 degrees out of phase. Therefore, the correct answer is '180 degrees.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the relationship between the period (T) and frequency (f) in SHM?",
+//         options: ["T = f", "T = 1/f", "T = 2π/f", "T = f/2π"],
+//         correct: 1,
+//         solution:
+//           "// Solution: The relationship between the period (T) and frequency (f) in Simple Harmonic Motion (SHM) is T = 1/f. Therefore, the correct answer is 'T = 1/f.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the relationship between the displacement (x) and the restoring force (F) in SHM?",
+//         options: ["F = kx", "F = k/x", "F = mx^2", "F = k√x"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The relationship between displacement (x) and restoring force (F) in Simple Harmonic Motion (SHM) is F = -kx. Therefore, the correct answer is 'F = kx.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "In SHM, where is the maximum speed and minimum potential energy found?",
+//         options: [
+//           "At the equilibrium position",
+//           "At the maximum displacement",
+//           "At the minimum displacement",
+//           "At the turning points",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: In Simple Harmonic Motion (SHM), the maximum speed and minimum potential energy are found at the turning points (maximum displacement). Therefore, the correct answer is 'At the turning points.'",
+//       },
+//     ],
+//   },
+
+//   Math: {
+//     "Complex Numbers": [
+//       {
+//         type: "mcq",
+//         question:
+//           "Which complex number lies on the circle centered at the origin with a radius of 5?",
+//         options: ["3 + 4i", "5 - 12i", "-1 - 2i", "2 + 2i"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The complex number 3 + 4i lies on the circle with radius 5, as its magnitude is √(3^2 + 4^2) = 5.\n// Therefore, the correct answer is '3 + 4i.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the principal value of the argument (angle) for the complex number -3 - 3i?",
+//         options: ["-45°", "135°", "-135°", "45°"],
+//         correct: 2,
+//         solution:
+//           "// Solution: Calculate the argument (angle) using the arctan function\n// θ = arctan((-3) / (-3)) = arctan(1) = -135°\n// Therefore, the correct answer is '-135°.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Which complex number is the cube root of unity?",
+//         options: ["1", "-1", "i", "-i"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The cube roots of unity are 1, e^(2πi/3), and e^(4πi/3)\n// Therefore, the correct answer is '1.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What is the modulus of the complex number -5 - 12i?",
+//         options: ["5", "12", "13", "17"],
+//         correct: 2,
+//         solution:
+//           "// Solution: The modulus (magnitude) is given by √((-5)^2 + (-12)^2) = √(25 + 144) = √169 = 13\n// Therefore, the correct answer is '13.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Which complex number lies in the first quadrant of the complex plane?",
+//         options: ["2 - 3i", "3 + 4i", "-5 + 2i", "-1 - i"],
+//         correct: 1,
+//         solution:
+//           "// Solution: The complex number 3 + 4i lies in the first quadrant as both the real and imaginary parts are positive.\n// Therefore, the correct answer is '3 + 4i.'",
+//       },
+//     ],
+
+//     "Integral Calculus": [
+//       {
+//         type: "mcq",
+//         question: "Which of the following is the antiderivative of e^x?",
+//         options: ["e^x", "ln|x|", "cos x", "sin x"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The antiderivative of e^x is e^x\n// Therefore, the correct answer is 'e^x.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What is the derivative of the function F(x) = ∫(3x^2) dx?",
+//         options: ["x^3", "3x^2", "x^2", "e^x"],
+//         correct: 1,
+//         solution:
+//           "// Solution: The derivative of F(x) = ∫(3x^2) dx with respect to x is 3x^2\n// Therefore, the correct answer is '3x^2.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Which of the following is the antiderivative of cos(x)?",
+//         options: ["sin(x)", "-sin(x)", "tan(x)", "cot(x)"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The antiderivative of cos(x) is sin(x)\n// Therefore, the correct answer is 'sin(x).'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the area between the curves y = x^2 and y = 2x from x = 0 to x = 2?",
+//         options: ["4", "8", "12", "16"],
+//         correct: 1,
+//         solution:
+//           "// Solution: Find the points of intersection and then integrate the difference of the curves\n// ∫(2x - x^2) dx from 0 to 2 = (x^2 - (x^3)/3) evaluated from 0 to 2 = 8/3\n// Therefore, the correct answer is '8.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the average value of the function f(x) = x^2 on the interval [0, 2]?",
+//         options: ["1", "2", "4/3", "8/3"],
+//         correct: 2,
+//         solution:
+//           "// Solution: The average value of f(x) on the interval [a, b] is given by (1/(b - a)) ∫f(x) dx from a to b\n// For f(x) = x^2 on [0, 2]: (1/(2 - 0)) ∫x^2 dx from 0 to 2 = 4/3\n// Therefore, the correct answer is '4/3.'",
+//       },
+//     ],
+
+//     Trignometry: [
+//       {
+//         type: "mcq",
+//         question: "What is the period of the function y = 2sin(3x)cos(2x)?",
+//         options: ["pi/2", "2pi/3", "2pi", "3pi/2"],
+//         correct: "2pi",
+//         solution:
+//           "// Solution: The period of y = A sin(Bx) cos(Cx) is given by 2pi/(|B| + |C|)\n// In this case, the period is 2pi/(3 + 2) = 2pi/5\n// Therefore, the correct answer is '2pi.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Evaluate the integral ∫(cos^2(x)sin(x)) dx.",
+//         options: [
+//           "(1/3)cos^3(x) + C",
+//           "(1/2)cos^2(x) + C",
+//           "(1/4)cos^4(x) + C",
+//           "cos(x)sin(x) + C",
+//         ],
+//         correct: "(1/2)cos^2(x) + C",
+//         solution:
+//           "// Solution: Use integration techniques to evaluate the integral\n// ∫(cos^2(x)sin(x)) dx = (1/2)cos^2(x) + C\n// Therefore, the correct answer is '(1/2)cos^2(x) + C.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Find the general solution to the equation 2sin^2(x) - sin(x) - 1 = 0.",
+//         options: [
+//           "[pi/3 + 2pi n, 5pi/3 + 2pi n]",
+//           "[pi/6 + pi n, 7pi/6 + pi n]",
+//           "[2pi/3 + 2pi n, 4pi/3 + 2pi n]",
+//           "[pi/4 + pi n, 3pi/4 + pi n]",
+//         ],
+//         correct: "[pi/3 + 2pi n, 5pi/3 + 2pi n]",
+//         solution:
+//           "// Solution: Solve the quadratic equation for sin(x)\n// 2sin^2(x) - sin(x) - 1 = 0\n// (2sin(x) + 1)(sin(x) - 1) = 0\n// sin(x) = -1/2 or sin(x) = 1\n// Therefore, the general solution is [pi/3 + 2pi n, 5pi/3 + 2pi n].",
+//       },
+//     ],
+
+//     "Cooridnate Geometry": [
+//       {
+//         type: "mcq",
+//         question:
+//           "If point A has coordinates (3, -4) and point B has coordinates (-2, 5), what is the distance AB?",
+//         options: ["5", "7", "10", "√74"],
+//         correct: 3,
+//         solution:
+//           "// Solution: Use the distance formula: d = √((x2 - x1)^2 + (y2 - y1)^2)\n// d = √((-2 - 3)^2 + (5 - (-4))^2) = √74\n// Therefore, the correct answer is '√74.'",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "If the points A(2, 3), B(5, -1), and C(-1, 4) form a triangle, what type of triangle is it?",
+//         options: ["Equilateral", "Isosceles", "Scalene", "Right-angled"],
+//         correct: 2,
+//         solution:
+//           "// Solution: Calculate the distances between the three pairs of points.\n// AB = √((5 - 2)^2 + (-1 - 3)^2) = 5\n// BC = √((-1 - 5)^2 + (4 - (-1))^2) = 7.81\n// AC = √((2 - (-1))^2 + (3 - 4)^2) = 3.16\n// Since all three sides have different lengths, the triangle is isosceles.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "The line 3x - 4y = 12 passes through which quadrant(s)?",
+//         options: ["Quadrant I", "Quadrant II", "Quadrant III", "Quadrant IV"],
+//         correct: [1, 3],
+//         solution:
+//           "// Solution: Substitute x = 4 and y = 0 (on the x-axis) into the equation: 3(4) - 4(0) = 12\n// Substitute x = 0 and y = -3 (on the y-axis) into the equation: 3(0) - 4(-3) = 12\n// The line passes through Quadrant I and Quadrant III.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the area of the triangle formed by the points (1, 2), (4, -3), and (-2, 1)?",
+//         options: ["6", "9", "12", "15"],
+//         correct: 1,
+//         solution:
+//           "// Solution: Use the Shoelace Formula to calculate the area of a triangle given its vertices.\n// Area = 0.5 * |(1 * (-3) + 4 * 1 + (-2) * 2) - (2 * 4 + (-3) * (-2) + 1 * 1)|\n// Area = 6\n// Therefore, the correct answer is '6.'",
+//       },
+//     ],
+//   },
+
+//   Chemistry: {
+//     "Structure Of Atom": [
+//       {
+//         type: "mcq",
+//         question: "Who proposed the planetary model of the atom?",
+//         options: [
+//           "J.J. Thomson",
+//           "Niels Bohr",
+//           "Erwin Schrödinger",
+//           "John Dalton",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: Niels Bohr proposed the planetary model of the atom.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "What is the mass of a proton?",
+//         options: ["1 amu", "1836 amu", "0 amu", "Approximately 1/1836 amu"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The mass of a proton is approximately 1 atomic mass unit (amu).",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Who discovered the neutron?",
+//         options: [
+//           "J.J. Thomson",
+//           "Niels Bohr",
+//           "James Chadwick",
+//           "Ernest Rutherford",
+//         ],
+//         correct: 2,
+//         solution: "// Solution: James Chadwick discovered the neutron.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Which quantum number represents the shape of an orbital?",
+//         options: [
+//           "Principal quantum number (n)",
+//           "Angular momentum quantum number (l)",
+//           "Magnetic quantum number (m)",
+//           "Spin quantum number (s)",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: The Angular momentum quantum number (l) represents the shape of an orbital.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Which element has the electron configuration 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹?",
+//         options: ["Carbon (C)", "Oxygen (O)", "Sodium (Na)", "Chlorine (Cl)"],
+//         correct: 2,
+//         solution:
+//           "// Solution: Sodium (Na) has the electron configuration 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹.",
+//       },
+//     ],
+
+//     "Chemical Bonding": [
+//       {
+//         type: "mcq",
+//         question: "In a covalent bond, what is being shared between two atoms?",
+//         options: ["Electrons", "Protons", "Neutrons", "Positrons"],
+//         correct: 0,
+//         solution:
+//           "// Solution: In a covalent bond, electrons are shared between two atoms.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What type of bond is formed between a metal and a non-metal?",
+//         options: [
+//           "Ionic bond",
+//           "Covalent bond",
+//           "Metallic bond",
+//           "Polar covalent bond",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: A bond between a metal and a non-metal is an ionic bond.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question: "Which of the following molecules is nonpolar?",
+//         options: ["HCl", "CO2", "NH3", "CH4"],
+//         correct: 3,
+//         solution:
+//           "// Solution: Methane (CH4) is nonpolar because of its symmetrical tetrahedral structure.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Which type of bond involves the sharing of electrons with a significant difference in electronegativity?",
+//         options: [
+//           "Ionic bond",
+//           "Covalent bond",
+//           "Metallic bond",
+//           "Polar covalent bond",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: A polar covalent bond involves the sharing of electrons with a significant electronegativity difference.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "Which of the following molecules has a trigonal planar molecular geometry?",
+//         options: ["BF3", "NH3", "CH4", "H2O"],
+//         correct: 0,
+//         solution:
+//           "// Solution: Boron trifluoride (BF3) has a trigonal planar molecular geometry.",
+//       },
+//     ],
+
+//     "Chemical Equilibrium": [
+//       {
+//         type: "mcq",
+//         question:
+//           "Which statement about a system at chemical equilibrium is true?",
+//         options: [
+//           "The concentrations of reactants and products remain constant.",
+//           "The reaction has stopped.",
+//           "The forward reaction rate equals the reverse reaction rate.",
+//           "The reaction has reached completion.",
+//         ],
+//         correct: 2,
+//         solution:
+//           "// Solution: At chemical equilibrium, the forward reaction rate equals the reverse reaction rate.",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "How does an increase in temperature affect an exothermic reaction at equilibrium?",
+//         options: [
+//           "Shifts the equilibrium to the left.",
+//           "Shifts the equilibrium to the right.",
+//           "Has no effect on the equilibrium position.",
+//           "Causes the reaction to stop.",
+//         ],
+//         correct: 0,
+//         solution:
+//           "// Solution: For an exothermic reaction, an increase in temperature shifts the equilibrium to the left.",
+//       },
+//       {
+//         type: "mcq",
+//         question:
+//           "Which factor does NOT affect the value of the equilibrium constant (Kc)?",
+//         options: [
+//           "Temperature",
+//           "Pressure",
+//           "Concentration of reactants and products",
+//           "Catalysts",
+//         ],
+//         correct: 3,
+//         solution:
+//           "// Solution: Catalysts do not affect the value of the equilibrium constant (Kc).",
+//       },
+
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the effect of decreasing the volume on a system at equilibrium for a reaction with fewer moles of gas on the reactant side?",
+//         options: [
+//           "Shifts the equilibrium to the left.",
+//           "Shifts the equilibrium to the right.",
+//           "Has no effect on the equilibrium position.",
+//           "Causes the reaction to stop.",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: Decreasing the volume on a system at equilibrium with fewer moles of gas on the reactant side shifts the equilibrium to the right.",
+//       },
+//       {
+//         type: "mcq",
+//         question: "What does a large equilibrium constant (Kc) indicate?",
+//         options: [
+//           "The reaction favors the reactants.",
+//           "The reaction favors the products.",
+//           "The reaction has stopped.",
+//           "The concentration of reactants and products is equal.",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: A large equilibrium constant (Kc) indicates that the reaction favors the products.",
+//       },
+//     ],
+
+//     "Ionic Equilibrium": [
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the definition of the term 'common ion effect' in ionic equilibrium?",
+//         options: [
+//           "The increase in solubility of a sparingly soluble salt in the presence of a common ion.",
+//           "The decrease in solubility of a sparingly soluble salt in the presence of a common ion.",
+//           "The increase in ionization of a weak electrolyte in the presence of a common ion.",
+//           "The decrease in ionization of a weak electrolyte in the presence of a common ion.",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: The common ion effect refers to the decrease in solubility of a sparingly soluble salt in the presence of a common ion.",
+//       },
+//       {
+//         type: "mcq",
+//         question: "Which of the following is a strong acid?",
+//         options: [
+//           "CH3COOH (Acetic acid)",
+//           "HCl (Hydrochloric acid)",
+//           "H2CO3 (Carbonic acid)",
+//           "HF (Hydrofluoric acid)",
+//         ],
+//         correct: 1,
+//         solution: "// Solution: HCl (Hydrochloric acid) is a strong acid.",
+//       },
+//       {
+//         type: "mcq",
+//         question:
+//           "What is the pH of a solution with a hydronium ion concentration of 1 x 10^(-2) M?",
+//         options: ["2", "4", "6", "8"],
+//         correct: 0,
+//         solution:
+//           "// Solution: The pH of a solution is given by -log[H⁺]. For a hydronium ion concentration of 1 x 10^(-2) M, the pH is 2.",
+//       },
+//       {
+//         type: "mcq",
+//         question: "Which of the following is a weak base?",
+//         options: [
+//           "NaOH (Sodium hydroxide)",
+//           "KOH (Potassium hydroxide)",
+//           "NH3 (Ammonia)",
+//           "Ca(OH)2 (Calcium hydroxide)",
+//         ],
+//         correct: 2,
+//         solution: "// Solution: NH3 (Ammonia) is a weak base.",
+//       },
+//       {
+//         type: "mcq",
+//         question:
+//           "What happens to the pH of a solution when a strong acid is added?",
+//         options: [
+//           "Increases",
+//           "Decreases",
+//           "Remains unchanged",
+//           "Becomes neutral",
+//         ],
+//         correct: 1,
+//         solution:
+//           "// Solution: When a strong acid is added, the pH of the solution decreases.",
+//       },
+//     ],
+//   },
+// };
+
+
 function Tests() {
   const dispatch = useDispatch();
 
@@ -2206,6 +2207,37 @@ function Tests() {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [submitted, setSubmitted] = useState(false);
 
+
+  const getQuestions = async (subject, selectedTopics) => {
+    let questions = [];
+  
+    try {
+      // Reference to the "Qbank" collection
+      const qbankCollection = collection(db, 'Qbank');
+  
+      // Fetch documents based on subject and selected topics
+      const q = query(
+        qbankCollection,
+        where('subject', '==', subject),
+        where('topic', 'in', selectedTopics)
+      );
+  
+      // Get the documents
+      const querySnapshot = await getDocs(q);
+  
+      // Process each document
+      querySnapshot.forEach((doc) => {
+        questions.push(doc.data());
+      });
+  
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+      // Handle the error
+    }
+  
+    return questions;
+  };
+
   const createTest = () => {
     // Function to shuffle an array
     const shuffleArray = (array) => {
@@ -2220,17 +2252,15 @@ function Tests() {
       return shuffledArray;
     };
 
-    // Function to get questions based on selected topics
-    const getQuestions = (subject, selectedTopics) => {
-      let questions = [];
-      selectedTopics.forEach((topic) => {
-        if (jsonData[subject] && jsonData[subject][topic]) {
-          questions = questions.concat(jsonData[subject][topic]);
-        }
-      });
-      return questions;
-    };
 
+    getqusetions(subject, selectedTopics)
+  .then((questions) => {
+    console.log('Fetched Questions:', questions);
+    // Now you can use the fetched questions as needed
+  })
+  .catch((error) => {
+    console.error('Error fetching questions:', error);
+  });
     // Get and shuffle math questions
     const mathQuestions = shuffleArray(
       getQuestions("Math", selectedMathTopics)
@@ -2253,6 +2283,7 @@ function Tests() {
     setTestCreated(true);
   };
 
+  
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
@@ -2260,6 +2291,7 @@ function Tests() {
   const handlePrevQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
   };
+
 
   // Send Data to Llama
   const sendDatatoLlama = async (inputText, modelType) => {
@@ -2270,6 +2302,17 @@ function Tests() {
     } catch (e) {
       console.error("Error getting data", e);
     }
+  };
+
+  // Function to get questions based on selected topics
+  const getQuestions = (subject, selectedTopics) => {
+    let questions = [];
+    selectedTopics.forEach((topic) => {
+      if (jsonData[subject] && jsonData[subject][topic]) {
+        questions = questions.concat(jsonData[subject][topic]);
+      }
+    });
+    return questions;
   };
 
   const handleOptionSelect = (selectedOption, correctOption) => {

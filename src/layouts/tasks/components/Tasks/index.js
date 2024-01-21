@@ -59,9 +59,32 @@ function Tasks() {
     }
   };
 
+  // useEffect(() => {
+  //   const userId = auth.currentUser?.uid;
+  
+  //   if (!userId) {
+  //     console.log("User not logged in.");
+  //     return;
+  //   }
+  
+  //   const q = query(collection(db, "tasks"), where("userId", "==", userId));
+  
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     const fetchedTasks = [];
+  //     querySnapshot.forEach((doc) => {
+  //       fetchedTasks.push({ id: doc.id, ...doc.data() });
+  //     });
+  
+  //     setTasks(fetchedTasks); // Update the state with the new data
+  //   });
+  
+  //   // Clean up the listener when the component unmounts or when you want to stop listening
+  //   return () => unsubscribe();
+  // }, []);  
+
   useEffect(() => {
     const userId = auth.currentUser?.uid;
-  
+    
     if (!userId) {
       console.log("User not logged in.");
       return;
@@ -80,8 +103,8 @@ function Tasks() {
   
     // Clean up the listener when the component unmounts or when you want to stop listening
     return () => unsubscribe();
-  }, []);  
-
+  }, []);
+  
   return (
     <Card sx={{ height: "100%" }}>
       <MDBox
