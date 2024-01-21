@@ -5,12 +5,9 @@
   "type": "javascript/auto",
   "author": "Parth Nikam",
   "description": "Project planning, test taking and performance tracking AI.",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
+    "url": "https://github.com/ParthNikam/oakhackfest_2024.git"
   },
   "dependencies": {
     "@emotion/cache": "11.10.8",
