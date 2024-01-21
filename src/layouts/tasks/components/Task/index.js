@@ -13,7 +13,7 @@ import MDButton from "components/MDButton";
 import { db, auth } from 'config/firebase';
 import { getDocs, deleteDoc, collection, where, query, doc } from 'firebase/firestore';
 
-function Task({ taskId, color, icon, name, emoji, description, value }) {
+function Task({ taskId, name, emoji, description }) {
   const handleDeleteButtonClick = async () => {
     try {
       if (auth.currentUser) {

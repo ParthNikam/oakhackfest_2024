@@ -37,10 +37,11 @@ function Tasks() {
       if (auth.currentUser) {
         // Create a new document in Firestore
         const newTaskRef = await addDoc(collection(db, "tasks"), {
-          title: "New Task",
+          title: "",
           content: [{"text":"", "checked":false}],
           emoji: "🙂",
           userId: auth.currentUser.uid,
+          dueDate: null,
           timestamp: serverTimestamp(),
         });
   
@@ -140,12 +141,9 @@ function Tasks() {
               <Task
                 key={task.id}
                 taskId={task.id}
-                color="success"
-                icon="expand_more"
                 name={task.title}
                 emoji={task.emoji}
-                description={task.content[0].text.slice(0, 20)} // Display the first 50 characters of content as description
-                value={(Math.floor(Math.random() * 1000) + 1).toString()} // Random value between 1 - 1000
+                description={task.content[0].text.slice(0, 20)} 
               />
             </Link>
           ))}

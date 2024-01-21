@@ -4,15 +4,16 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD83ipeT7odWbiePmnUpTwRr-ORRqDaKDI",
-  authDomain: "hello-world-30b0a.firebaseapp.com",
-  databaseURL: "https://hello-world-30b0a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "hello-world-30b0a",
-  storageBucket: "hello-world-30b0a.appspot.com",
-  messagingSenderId: "999977495484",
-  appId: "1:999977495484:web:2b57da153faf437e6c19b9",
-  measurementId: "G-LGMD1PKX0Q",
+  apiKey: "AIzaSyCSwiTkaKpMpugkHiwfVfmF3gvcUqUFYYE",
+  authDomain: "hackathon-28b28.firebaseapp.com",
+  databaseURL: "https://hackathon-28b28-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hackathon-28b28",
+  storageBucket: "hackathon-28b28.appspot.com",
+  messagingSenderId: "21058829054",
+  appId: "1:21058829054:web:78014b25e9ae698ce943af",
+  measurementId: "G-1WFDHXLNVK"
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

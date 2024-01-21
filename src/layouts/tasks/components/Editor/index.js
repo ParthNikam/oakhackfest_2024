@@ -169,7 +169,7 @@ function Editor({ taskId }) {
       }
     };
     updateTaskData();
-  }, [title, content]);
+  }, [title, content, selectedEmoji]);
 
   // Send Data to Llama
   const sendDatatoLlama = async (inputText, modelType) => {
@@ -258,24 +258,54 @@ function Editor({ taskId }) {
                   />
                 </Grid>
 
-                {/* <Grid item xs={12} lg={12}>
-                  <Grid container>
+                <Grid item xs={12} lg={12}>
+                  <Grid container spacing={2}>
+                    {/* <Grid item xs={12} lg={2}>
+                    <MDInput
+                    id="standard-basic"
+                    variant="outlined"
+                    fontWeigh="medium"
+                    placeholder="Due Date"
+                    style={{ height:"25px", }}
+                    inputProps={{ style: { fontSize: 20 } }}
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                  />
+                    </Grid> */}
                     <Grid item xs={12} lg={2}>
-                      <Chip label={dueDate} />
-                    </Grid>
-                    <Grid item xs={12} lg={2}>
-                      <Chip label={priority} />
+                    <MDInput
+                    id="standard-basic"
+                    variant="outlined"
+                    style={{ height:"25px", }}
+
+                    fontWeigh="medium"
+                    placeholder="Priority"
+                    inputProps={{ style: { fontSize: 20 } }}
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                  />
 
                     </Grid>
                     <Grid item xs={12} lg={2}>
-                      <Chip label={status} />
+                    <MDInput
+                    id="standard-basic"
+                    variant="outlined"
+                    style={{ height:"25px", }}
+                    fontWeigh="medium"
+                    placeholder="Status"
+                    inputProps={{ style: { fontSize: 20 } }}
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                  />
 
                     </Grid>
-                    <Grid item xs={12} lg={2}>
+                    <Grid item xs={12} lg={5}>
+                      <MDBox mt={3} >
                     <Progress color="info" value={progressPercentage} />
+                      </MDBox>
                     </Grid>
                   </Grid>
-                </Grid> */}
+                </Grid>
               </Grid>
             </MDBox>
           </MDBox>
