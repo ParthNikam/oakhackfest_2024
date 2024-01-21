@@ -38,6 +38,7 @@ function Editor({ taskId }) {
   const [dueDate, setDueDate] = useState(null);
   const [priority, setPriority] = useState("");
   const [status, setStatus] = useState("");
+  const [selectedEmoji, setSelectedEmoji] = useState("");
 
   // Date picker
 
@@ -66,37 +67,6 @@ function Editor({ taskId }) {
       </MDBox>
     </MDBox>
   );
-
-  // Emoji Picker
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedEmoji, setSelectedEmoji] = useState("");
-
-  const handleEmojiClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorMenuEl(null);
-  };
-
-  const onEmojiClick = (emojiObject) => {
-    setSelectedEmoji(emojiObject);
-    setAnchorMenuEl(null);
-  };
-
-  useEffect(() => {
-    const handleDocumentClick = (event) => {
-      if (anchorEl && !anchorEl.contains(event.target)) {
-        handleClose();
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
-
-    return () => {
-      document.removeEventListener("click", handleDocumentClick);
-    };
-  }, [anchorEl]);
 
   // Task Box
   const handleKeyPress = (e, index) => {
@@ -187,9 +157,11 @@ function Editor({ taskId }) {
         await updateDoc(taskDoc, {
           title: title,
           content: content,
-          // dueDate: dueDate,
-          // priority: priority,
-          // status: status
+          dueDate: dueDate,
+          priority: priority,
+          status: status,
+          emoji: selectedEmoji,
+          updatedAt: serverTimestamp(),
         });
       } catch (error) {
         console.error("Error updating task data", error);
@@ -265,27 +237,12 @@ function Editor({ taskId }) {
                 color="info"
                 size="large"
                 iconOnly
-                onClick={handleEmojiClick}
+                
               >
                 <span style={{ fontSize: "1.5em" }}>
                   {selectedEmoji || "😊"}
                 </span>
               </MDButton>
-              {/* <Popover
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
-              >
-                <EmojiPicker onSelect={onEmojiClick} />
-              </Popover> */}
             </MDBox>
             <MDBox display="flex" flexDirection="column">
               <Grid container spacing={2}>
@@ -382,36 +339,6 @@ function Editor({ taskId }) {
                           sx={{ width: "20px", height: "20px" }}
                         />
                         </MDButton>
-
-                        // <div>
-                        //   <MDButton
-                        //     id="basic-button"
-                        //     aria-controls="basic-menu"
-                        //     aria-haspopup="true"
-                        //     variant="outlined"
-                        //     color="info"
-                        //     size="medium"
-                        //     iconOnly
-                        //     aria-expanded={open ? "true" : undefined}
-                        //     onClick={handleMenuClick}
-                        //   >
-                        //     <AutoAwesomeRoundedIcon
-                        //       sx={{ width: "20px", height: "20px" }}
-                        //     />
-                        //   </MDButton>
-                        //   <Menu
-                        //     id="basic-menu"
-                        //     anchorEl={anchorMenuEl}
-                        //     open={open}
-                        //     onClose={handleClose}
-                        //     MenuListProps={{
-                        //       "aria-labelledby": "basic-button",
-                        //     }}
-                        //   >
-                        //     <MenuItem onClick={() => handleAssistantClick(index, "planner")}>Planner</MenuItem>
-                            
-                        //   </Menu>
-                        // </div>
                       )}
                     </Grid>
                   </Grid>

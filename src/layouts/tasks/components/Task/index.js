@@ -13,7 +13,7 @@ import MDButton from "components/MDButton";
 import { db, auth } from 'config/firebase';
 import { getDocs, deleteDoc, collection, where, query, doc } from 'firebase/firestore';
 
-function Task({ taskId, color, icon, name,emoji, description, value }) {
+function Task({ taskId, color, icon, name, emoji, description, value }) {
   const handleDeleteButtonClick = async () => {
     try {
       if (auth.currentUser) {
@@ -50,7 +50,7 @@ function Task({ taskId, color, icon, name,emoji, description, value }) {
         <MDBox display="flex" alignItems="center">
           <MDBox mr={1}>
             <MDButton variant="outlined" color={"none"} iconOnly circular>
-            <span style={{ fontSize: "1.2em" }}>{emoji || "😊"}</span>
+            <span style={{ fontSize: "2em" }}>{emoji || "😊"}</span>
             </MDButton>
           </MDBox>
           <MDBox display="flex" flexDirection="column">
@@ -65,11 +65,12 @@ function Task({ taskId, color, icon, name,emoji, description, value }) {
         <MDButton
           variant="outlined"
           color={"error"}
+          
           iconOnly
           circular
           onClick={handleDeleteButtonClick}
         >
-          <Icon sx={{ fontWeight: "light" }}>close</Icon>
+          <Icon sx={{ fontSize: "1em", fontWeight: "light" }}>close</Icon>
         </MDButton>
       </MDBox>
     </MDBox>

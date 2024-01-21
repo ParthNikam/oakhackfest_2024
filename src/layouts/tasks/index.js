@@ -11,7 +11,7 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import Editor from "./components/Editor";
+import Editor from "./components/Editor/index";
 import UserTasks from "layouts/tasks/components/Tasks";
 
 function Tasks() {

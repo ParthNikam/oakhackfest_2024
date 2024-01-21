@@ -1,4 +1,4 @@
-
+import {React, useState, useEffect} from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -15,11 +15,21 @@ import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import projectsTableData from "layouts/schedule/data/TaskData";
-
+import ProjectData from "layouts/schedule/data/TaskData";
 
 function Tables() {
-  const { columns: pColumns, rows: pRows } = projectsTableData();
+
+  const [newestTasks, setNewestTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [upcomingTasks, setUpcomingTasks] = useState([]);
+
+  
+  // const { columns: pColumns, rows: pRows } = projectsTableData();
+  const { columns: pColumns, rows: newestRows } = ProjectData(newestTasks);
+  const { columns: cColumns, rows: completedRows } = ProjectData(completedTasks);
+  const { columns: uColumns, rows: upcomingRows } = ProjectData(upcomingTasks);
+
+  
 
   return (
     <DashboardLayout>
@@ -28,7 +38,7 @@ function Tables() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-            <MDBox
+              <MDBox
                 mx={2}
                 mt={-3}
                 py={3}
@@ -44,17 +54,16 @@ function Tables() {
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
+                  table={{ columns: pColumns, rows: newestRows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}
                   noEndBorder
                 />
               </MDBox>
-
             </Card>
           </Grid>
-          
+
           <Grid item xs={12}>
             <Card>
               <MDBox
@@ -68,12 +77,40 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Projects Table
+                  Completed
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
+                  table={{ columns: cColumns, rows: completedRows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  Upcoming
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns: uColumns, rows: upcomingRows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}

@@ -37,8 +37,9 @@ function Tasks() {
       if (auth.currentUser) {
         // Create a new document in Firestore
         const newTaskRef = await addDoc(collection(db, "tasks"), {
-          title: "",
+          title: "New Task",
           content: [{"text":"", "checked":false}],
+          emoji: "🙂",
           userId: auth.currentUser.uid,
           timestamp: serverTimestamp(),
         });

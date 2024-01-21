@@ -24,7 +24,6 @@
 // React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/schedule";
-import Billing from "layouts/calendar";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import Tasks from "layouts/tasks";
@@ -51,14 +50,6 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/schedule",
     component: <Tables />,
-  },
-  {
-    type: "collapse",
-    name: "Calendar",
-    key: "calendar",
-    icon: <Icon fontSize="small">calendar_month</Icon>,
-    route: "/calendar",
-    component: <Billing />,
   },
   {
     type: "collapse",

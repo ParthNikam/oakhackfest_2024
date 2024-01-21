@@ -2234,19 +2234,19 @@ function Tests() {
     // Get and shuffle math questions
     const mathQuestions = shuffleArray(
       getQuestions("Math", selectedMathTopics)
-    ).slice(0, 1);
+    ).slice(0, 4);
     setSelectedMathQuestions(mathQuestions);
 
     // Get and shuffle physics questions
     const phsxQuestions = shuffleArray(
       getQuestions("Physics", selectedPhsxTopics)
-    ).slice(0, 1);
+    ).slice(0, 3);
     setSelectedPhsxQuestions(phsxQuestions);
 
     // Get and shuffle chemistry questions
     const chemQuestions = shuffleArray(
       getQuestions("Chemistry", selectedChemTopics)
-    ).slice(0, 1);
+    ).slice(0, 3);
     setSelectedChemQuestions(chemQuestions);
 
     // Additional logic for rendering the questions will be added later
@@ -2299,6 +2299,19 @@ function Tests() {
     selectedPhsxQuestions,
     selectedChemQuestions
   );
+
+  const [AIOutput, setAIOutput] = useState("");
+  const handleSubmit = async () => {
+    setSubmitted(true);
+    console.log("sending data ", incorrectQuestions);
+    const mxtrlOut = await sendDatatoLlama(incorrectQuestions, "analyzer");
+    if (mxtrlOut !== undefined) {
+      setAIOutput(mxtrlOut);
+    } else {
+      console.error("Received undefined data from sendDatatoLlama");
+    }
+  };
+
   const renderQuestion = () => {
     if (currentQuestions.length === 0) {
       return <div>No questions available for the selected topics.</div>;
@@ -2342,7 +2355,7 @@ function Tests() {
                 <MDButton
                   variant="contained"
                   color="success"
-                  onClick={() => setSubmitted(true)}
+                  onClick={handleSubmit}
                 >
                   Submit
                 </MDButton>
@@ -2383,10 +2396,13 @@ function Tests() {
         </MDTypography>
         {incorrectQuestionDetails.map((question, index) => (
           <div key={index}>
-            <MDTypography variant="subtitle1">
+            <MDTypography
+              variant="subtitle1"
+              style={{ color: "red", fontWeight: "bold" }}
+            >
               Question {index + 1} - {question.question}
             </MDTypography>
-            <MDTypography>
+            <MDTypography style={{ color: "red" }}>
               Correct Answer: {question.options[question.correct]}
             </MDTypography>
           </div>
@@ -2397,10 +2413,13 @@ function Tests() {
             <MDTypography variant="h5">All Questions:</MDTypography>
             {currentQuestions.map((question, index) => (
               <div key={index}>
-                <MDTypography variant="subtitle1">
+                <MDTypography
+                  variant="subtitle1"
+                  style={{ color: "green", fontWeight: "bold" }}
+                >
                   Question {index + 1} - {question.question}
                 </MDTypography>
-                <MDTypography>
+                <MDTypography style={{ color: "green" }}>
                   Correct Answer: {question.options[question.correct]}
                 </MDTypography>
               </div>
@@ -2424,30 +2443,76 @@ function Tests() {
                 </Grid>
               ) : (
                 <Grid item xs={12} lg={8} ml={4}>
-                  <Grid container spacing={3}>
+                  <Grid container spacing={2}>
                     <Grid item xs={12} xl={4}>
-                      {/* ... existing code ... */}
+                      <Autocomplete
+                        multiple
+                        id="mathTopics"
+                        options={mathTopics}
+                        onChange={(event, newValue) =>
+                          setSelectedMathTopics(newValue)
+                        }
+                        renderInput={(params) => (
+                          <TextField {...params} label="Math Topics" />
+                        )}
+                      />
                     </Grid>
-                    {/* ... existing code ... */}
+                    <Grid item xs={12} xl={4}>
+                      <Autocomplete
+                        multiple
+                        id="phsxTopics"
+                        options={phsxTopics}
+                        onChange={(event, newValue) =>
+                          setSelectedPhsxTopics(newValue)
+                        }
+                        renderInput={(params) => (
+                          <TextField {...params} label="Phsx Topics" />
+                        )}
+                      />
+                    </Grid>
+                    <Grid item xs={12} xl={4}>
+                      <Autocomplete
+                        multiple
+                        id="chemTopics"
+                        options={chemTopics}
+                        onChange={(event, newValue) =>
+                          setSelectedChemTopics(newValue)
+                        }
+                        renderInput={(params) => (
+                          <TextField {...params} label="Chem Topics" />
+                        )}
+                      />
+                    </Grid>
+                    <Grid item xs={12} xl={6}>
+                      <MDButton color="info" onClick={createTest}>
+                        Create Test
+                      </MDButton>
+                    </Grid>
                   </Grid>
                 </Grid>
               )}
               {submitted ? (
-                <Grid item xs={12} lg={8}>
-                  {/* AI Analysis */}
-                  <MDTypography>AI Analysis</MDTypography>
+                <Grid item xs={12} lg={8} ml={4}>
+                  <MDTypography
+                    variant="subtitle1"
+                    color="info"
+                    fontWeight="bold"
+                  >
+                    AI Analysis
+                  </MDTypography>
+                  <MDBox>
+                    <MDTypography>{AIOutput}</MDTypography>
+                  </MDBox>
                 </Grid>
-              ) : null}
+              ) : (
+                <div></div>
+              )}
               {submitted ? (
-                <Grid item xs={12} lg={4} mt={}>
-                  {/* Render Incorrect Questions */}
+                <Grid item xs={12} lg={3} mt={-50}>
                   {renderIncorrectQuestions()}
                 </Grid>
               ) : (
-                <Grid item xs={12} lg={4}>
-                  {/* Invoice or Placeholder */}
-                  Invoice
-                </Grid>
+                <Grid item xs={12} lg={3}></Grid>
               )}
             </Grid>
           </MDBox>

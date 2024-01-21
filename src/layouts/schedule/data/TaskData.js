@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 
-
 import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 
@@ -23,6 +22,12 @@ import SellIcon from "@mui/icons-material/Sell";
 export default function ProjectData() {
   const Navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
+  const [newestTasks, setNewestTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [upcomingTasks, setUpcomingTasks] = useState([]);
+  const [progressPercentages, setProgressPercentages] = useState([]);
+  const [recentTasks, setRecentTasks] = useState([]); 
+
 
   const Project = ({ emoji, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -52,26 +57,54 @@ export default function ProjectData() {
     </MDBox>
   );
 
-  // fetch all tasks
+  // Fetch all tasks
   useEffect(() => {
     const userId = auth.currentUser?.uid;
     if (!userId) {
       console.log("User not logged in.");
       return;
     }
+
     const q = query(collection(db, "tasks"), where("userId", "==", userId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const fetchedTasks = [];
       querySnapshot.forEach((doc) => {
         fetchedTasks.push({ id: doc.id, ...doc.data() });
       });
+
+      const now = new Date();
+      const sixHoursAgo = new Date(now - 6 * 60 * 60 * 1000); // 6 hours ago
+
+      // Separate tasks into categories
+      const categorizedTasks = fetchedTasks.reduce(
+        (categories, task) => {
+          const allChecked = task.content.every((item) => item.checked);
+          const allNotChecked = task.content.every((item) => !item.checked);
+          const updatedAt = new Date(task.updatedAt); // Assuming you have an 'updatedAt' field in your task object
+
+          if (allChecked) {
+            categories.completed.push(task);
+          } else if (allNotChecked) {
+            categories.upcoming.push(task);
+          } else if (updatedAt > sixHoursAgo) {
+            categories.recent.push(task);
+          }
+
+          return categories;
+        },
+        { completed: [], upcoming: [], recent: [] }
+      );
+
       setTasks(fetchedTasks);
+      setCompletedTasks(categorizedTasks.completed);
+      setUpcomingTasks(categorizedTasks.upcoming);
+      setRecentTasks(categorizedTasks.recent);
     });
+
     return () => unsubscribe();
   }, []);
 
   // progress percentage
-  const [progressPercentages, setProgressPercentages] = useState([]);
 
   useEffect(() => {
     // Calculate progress percentage for each task
