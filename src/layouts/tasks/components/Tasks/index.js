@@ -29,7 +29,7 @@ import {
 import Task from "layouts/tasks/components/Task";
 
 function Tasks() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
 
   const handleNewButtonClick = async () => {
@@ -43,14 +43,14 @@ function Tasks() {
           userId: auth.currentUser.uid,
           timestamp: serverTimestamp(),
         });
-
+  
         // Get the newly assigned taskId
         const newTaskDocSnapshot = await getDoc(newTaskRef);
         const newTaskId = newTaskDocSnapshot.id;
-
+  
         // Navigate to the newly created task
-        console.log("navigaintg to the bitch");
-        Navigate(`/tasks/${newTaskId}`);
+        console.log("navigating to the task");
+        navigate(`/tasks/${newTaskId}`);
 
       }
     } catch (e) {
@@ -60,26 +60,26 @@ function Tasks() {
 
   useEffect(() => {
     const userId = auth.currentUser?.uid;
-
+  
     if (!userId) {
       console.log("User not logged in.");
       return;
     }
-
+  
     const q = query(collection(db, "tasks"), where("userId", "==", userId));
-
+  
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const fetchedTasks = [];
       querySnapshot.forEach((doc) => {
         fetchedTasks.push({ id: doc.id, ...doc.data() });
       });
-
-      setTasks(fetchedTasks);
+  
+      setTasks(fetchedTasks); // Update the state with the new data
     });
-
+  
     // Clean up the listener when the component unmounts or when you want to stop listening
     return () => unsubscribe();
-  }, []);
+  }, []);  
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -103,7 +103,7 @@ function Tasks() {
           size="small"
           onClick={handleNewButtonClick}
         >
-          + new
+          + new task
         </MDButton>
         <MDBox display="flex" alignItems="flex-start">
           <MDBox color="text" mr={0.5} lineHeight={0}>

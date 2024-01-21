@@ -232,17 +232,16 @@ function Editor({ taskId }) {
         >
           <MDBox display="flex" alignItems="center" ml={{ lg: 10 }}>
             <MDBox mr={2}>
-              <MDButton
-                variant="outlined"
-                color="info"
-                size="large"
-                iconOnly
-                
-              >
-                <span style={{ fontSize: "1.5em" }}>
-                  {selectedEmoji || "😊"}
-                </span>
-              </MDButton>
+            <MDInput
+                    id="standard-basic"
+                    variant="outlined"
+                    fontSize="large"
+                    fontWeigh="medium"
+                    style={{ fontSize: "1.5em", width:"65px" }}
+                    inputProps={{ style: { fontSize: 30 } }}
+                    value={selectedEmoji}
+                    onChange={(e) => setSelectedEmoji(e.target.value)}
+                  />
             </MDBox>
             <MDBox display="flex" flexDirection="column">
               <Grid container spacing={2}>
